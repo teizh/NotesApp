@@ -12,8 +12,8 @@ import com.example.notesapp.model.Task
 import com.example.notesapp.model.TaskViewModel
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    lateinit var viewModel: TaskViewModel
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: TaskViewModel
     private lateinit var taskAdapter: TaskAdapter
 
     @SuppressLint("NotifyDataSetChanged")
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[TaskViewModel::class.java]
+        viewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
         taskAdapter = TaskAdapter(emptyList(), this::onLongClick) { task, _ ->
             viewModel.toggleTask(task)

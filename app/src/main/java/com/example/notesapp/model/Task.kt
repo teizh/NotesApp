@@ -4,8 +4,8 @@ data class Task(
     val title: String, var isDone: Boolean = false
 ) {
 
-    fun toggleDone() {
+ /*   fun toggleDone() {
         isDone = !isDone
-    }
+    }*/
 }
 

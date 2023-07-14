@@ -1,5 +1,6 @@
 package com.example.notesapp.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import com.example.notesapp.model.Task
 
 class TaskAdapter(
     var taskList: List<Task>,
-    var onLongClick: (Task) -> Unit,
+    private var onLongClick: (Task) -> Unit,
     private val onTaskCheckChanged: (position: Int, isChecked: Boolean) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -24,7 +25,7 @@ class TaskAdapter(
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = taskList[position]
-        holder.onBind(task)
+        holder.onBind(task, onTaskCheckChanged)
 
     }
 
@@ -32,9 +33,15 @@ class TaskAdapter(
         return taskList.size
     }
 
+/*    @SuppressLint("NotifyDataSetChanged")
+    fun setTasks(taskList: List<Task>) {
+        this.taskList = taskList
+        notifyDataSetChanged()
+    }*/
+
     inner class TaskViewHolder(private val binding: TaskItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(task: Task) {
+        fun onBind(task: Task, onTaskCheckChanged: (position: Int, isChecked: Boolean) -> Unit) {
             binding.tvTitle.text = task.title
             binding.checkbox.isChecked = task.isDone
 
@@ -45,14 +52,19 @@ class TaskAdapter(
 
             itemView.setOnClickListener {
                 onLongClick(task)
-                false
+
             }
         }
 
-        private fun onTaskCheckChanged(position: Int, isChecked: Boolean) {
+  /*      private fun onTaskCheckChanged(position: Int, isChecked: Boolean) {
             val task = taskList[position]
             task.toggleDone()
             notifyItemChanged(position, isChecked)
         }
+        *//*         fun removeTask(position: Int) {
+                    val tasks = taskList.toMutableList()
+                    tasks.removeAt(position)
+                    notifyDataSetChanged()
+                }*/
     }
 }
