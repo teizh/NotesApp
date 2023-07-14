@@ -1,6 +1,5 @@
 package com.example.notesapp.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,11 +32,6 @@ class TaskAdapter(
         return taskList.size
     }
 
-/*    @SuppressLint("NotifyDataSetChanged")
-    fun setTasks(taskList: List<Task>) {
-        this.taskList = taskList
-        notifyDataSetChanged()
-    }*/
 
     inner class TaskViewHolder(private val binding: TaskItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -52,19 +46,7 @@ class TaskAdapter(
 
             itemView.setOnClickListener {
                 onLongClick(task)
-
             }
         }
-
-  /*      private fun onTaskCheckChanged(position: Int, isChecked: Boolean) {
-            val task = taskList[position]
-            task.toggleDone()
-            notifyItemChanged(position, isChecked)
-        }
-        *//*         fun removeTask(position: Int) {
-                    val tasks = taskList.toMutableList()
-                    tasks.removeAt(position)
-                    notifyDataSetChanged()
-                }*/
     }
 }
